@@ -7,8 +7,10 @@ import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 
 const CartButtons = () => {
-  const {closeSidebar} = useProductsContext()
-  const {total_items} = useCartContext()
+  const { closeSidebar } = useProductsContext();
+  const { total_items } = useCartContext();
+  const { loginWithRedirect, myUser, logout } = useUserContext();
+  console.log(myUser)
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
@@ -18,9 +20,21 @@ const CartButtons = () => {
           <span className="cart-value">{total_items}</span>
         </span>
       </Link>
-      <button type="button" className="auth-btn" onClick={closeSidebar} >
-      Login <FaUserPlus/>
+      {myUser ? (
+        <button
+        type="button"
+        className="auth-btn"
+        onClick={() => logout({ returnTo: window.location.origin })}
+      >
+      Logout <img src={myUser.picture} alt={myUser.name} className="UserImg" />
+        
       </button>
+        
+      ) : (
+        <button type="button" className="auth-btn" onClick={loginWithRedirect}>
+        Login <FaUserPlus />
+      </button>
+      )}
     </Wrapper>
   );
 };
@@ -48,6 +62,12 @@ const Wrapper = styled.div`
       height: 1.6rem;
       margin-left: 5px;
     }
+  }
+  .UserImg{
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    margin-left: 0.1rem;
   }
   .cart-value {
     position: absolute;
