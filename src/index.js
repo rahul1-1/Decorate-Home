@@ -16,12 +16,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // qC6D1r9bSeIBVIS9nORFdgAXnuy_ANlfJRoqhmNLOiBkqTl7Ao_BwSYOwthS6ocx
 
 root.render(
-  <Auth0Provider
-  domain="dev-q0r4qsqzefx4wrrs.us.auth0.com"
-  clientId="ZgaPzzdBK4Iur2c7T8PWx9QJTYOzuZXb"
-  redirect_uri={ window.location.origin}
-  cacheLocation="localstorage"
-  
+   <Auth0Provider
+    domain="dev-q0r4qsqzefx4wrrs.us.auth0.com"
+    clientId="ZgaPzzdBK4Iur2c7T8PWx9QJTYOzuZXb"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
   >
   <UserProvider>
     <ProductsProvider>
